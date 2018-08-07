@@ -33,6 +33,7 @@ include "Swagger/Client/HeaderSelector.php";
 include "Swagger/Client/ObjectSerializer.php";
 include "Swagger/Client/ApiException.php";
 include "Swagger/Client/Api/SystemCheckApi.php";
+include "Swagger/Client/Api/IdentityApi.php";
 
 
 print Swagger\Client\Configuration::toDebugReport();
@@ -102,20 +103,6 @@ $jsontoken=json_decode($response);
 
 $bearertoken = $jsontoken->access_token;
 
-// echo "<br/> Access Token :<br/>"; 
-
-// echo $bearertoken;
-
-// echo "<br/>"; 
-
-/////
-
-// test deacticate ssl check
-// curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-// curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-
-// Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('x-api-key', 'Bearer');
-// Swagger\Client\Configuration::getDefaultConfiguration()->setAccessToken($bearertoken);
 
 echo "<h5>Swagger config</h5>";
 print Swagger\Client\Configuration::toDebugReport();
@@ -123,28 +110,13 @@ print Swagger\Client\Configuration::toDebugReport();
 echo "<h5>system check</h5>";
 
 //https://markoivancic.from.hr/set-the-authorization-bearer-header-in-guzzle-http-client/
-$config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKey('api-key', $bearertoken);
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-$config = Swagger\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('api-key', 'Bearer');
 
- // $config = $apiInstance->getConfig();
- // $config->setApiKeyPrefix('Authorization','Bearer ');
- // $config->setAccessToken($bearertoken);
+// todo : generate client code WITH oauth support (should have header : bearer in the code)
 
-$httpClient=new GuzzleHttp\Client();
+$httpClient=new GuzzleHttp\Client(['headers' => ['Authorization' => 'Bearer '.$bearertoken]]);
 
-$apiInstance = new Swagger\Client\Api\SystemCheckApi($httpClient,$config);
+$apiInstance = new Swagger\Client\Api\SystemCheckApi($httpClient);
 
-//$apiInstance = new Swagger\Client\Api\SystemCheckApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-  //  new GuzzleHttp\Client());
-
- // $config = $apiInstance->getConfig();
- // $config->setApiKeyPrefix('Authorization','Bearer ');
- // $config->setAccessToken($bearertoken);
-
- //var_dump($config);
  
 $id = "id_example"; // string | input message
 
@@ -152,11 +124,32 @@ $id = "id_example"; // string | input message
 
 try {
     $result = $apiInstance->echoGet($id);
-    print_r($result);
+    echo "--- success : ";
+	print_r($result);
+	
 } catch (Exception $e) {
     echo 'Exception when calling SystemCheckApi->echoGet: ', $e->getMessage(), PHP_EOL;
 }
+
+
+// test 2
+$identityapiInstance = new Swagger\Client\Api\IdentityApi($httpClient);
+
+ 
+
+try {
+    $result = $identityapiInstance->userWhoAmI();
+    echo "--- success : ";
+	print_r($result);
+	
+} catch (Exception $e) {
+    echo 'Exception when calling IdentityApi->userWhoAmI: ', $e->getMessage(), PHP_EOL;
+}
 ?>
+
+?>
+
+
 	
 	<?php
 // define variables and set to empty values
