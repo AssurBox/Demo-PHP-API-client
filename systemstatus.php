@@ -5,7 +5,7 @@
 	<?php include("includes/head-tag-contents.php");?>
 </head>
 <body>
-
+<?php include("includes/authenticate.php");?>
 <?php include("includes/design-top.php");?>
 <?php include("includes/navigation.php");?>
 
@@ -21,12 +21,17 @@
 	// exemple swagger	
 	//https://github.com/swagger-api/swagger-codegen/blob/master/samples/client/petstore/php/test.php
 	
-	
-require_once(__DIR__ . '/vendor/autoloader.php');
-
-// show error reporting
+	// show error reporting
 ini_set('display_errors', 1);
 error_reporting(~0);
+
+
+require_once(__DIR__ . '/vendor/autoloader.php');
+
+// doesn't work ...
+require_once(__DIR__ . '/autoload.php');
+
+
 
 include "Swagger/Client/Configuration.php";
 include "Swagger/Client/HeaderSelector.php";
@@ -35,99 +40,23 @@ include "Swagger/Client/ApiException.php";
 include "Swagger/Client/Api/SystemCheckApi.php";
 include "Swagger/Client/Api/IdentityApi.php";
 
+echo "<h5>System check</h5>";
 
-print Swagger\Client\Configuration::toDebugReport();
-
-//https://github.com/swagger-api/swagger-codegen/blob/master/samples/client/petstore/php/test.php
-
-// to change temp folder path
-// Swagger\Client\Configuration::getDefaultConfiguration()->setTempFolderPath('/var/tmp/php/');
-// // to enable logging
- //Swagger\Client\Configuration::getDefaultConfiguration()->setDebug(true);
-// Swagger\Client\Configuration::getDefaultConfiguration()->setDebugFile('/var/tmp/php_debug.log');
-
-echo "<br/><hr/><br/>";
-
-
-/////
-
-// $client_id = 'HMLR4melrdXxaT5G4k3X3Q==';
-// $client_secret = 'vYy2FVXqJhaivLZqlAa6uHHgHHolPDWMhhGs52WIM5V/98pO8jRIRsKOgOC+zQzyIDKRsUj7rbwAPLNNoMb7Xg==';
-
-
- $client_id = '73n5JXra2YtjtCsM4S9Brw==';
- $client_secret = 'ODy8BUGdxKm5rhKp6DH/aJkpVanu1vfpr+4WjgOCEWvlmuH78c8t8HTnRAJxoKae0EhNgTpuhEczRQ68Deb0Wg==';
-
-//$redirect_uri= "http://localhost:8080/callback.php";
-//$authorization_code = $_GET['code'];
-// if(!$authorization_code){
-    // die('something went wrong!');
-// }
-$url = 'https://devslot.assurbox.net/oauth/token';
-
-
-////
-
-$myvars = 'client_id=' . $client_id . '&client_secret=' . $client_secret .'&grant_type=client_credentials';
-//echo "<br/>";
-//echo $myvars;
-
- $data = array(
-    'client_id' => $client_id,
-    'client_secret' => $client_secret,
-    'grant_type' => 'client_credentials'
-  );
-  
-  //echo "<br/>";
-  $postdata = http_build_query($data); // avec l'encodage ca marche
-  //echo $postdata;
-   // echo "<br/>";
- 
-//https://stackoverflow.com/questions/3080146/post-data-to-a-url-in-php
-//http://www.php.net/curl_setopt
-$ch = curl_init( $url );
-curl_setopt( $ch, CURLOPT_POST, 1);
-curl_setopt( $ch, CURLOPT_POSTFIELDS, $postdata);
-curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 0);
-curl_setopt( $ch, CURLOPT_HEADER, 0);
-curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
-
-$response = curl_exec( $ch );
-
-//var_dump($response);
-
-//echo "<br/> JSON :<br/>"; 
-
-$jsontoken=json_decode($response);
-//var_dump($jsontoken);
-
-$bearertoken = $jsontoken->access_token;
-
-
-echo "<h5>Swagger config</h5>";
-print Swagger\Client\Configuration::toDebugReport();
-
-echo "<h5>system check</h5>";
-
-//https://markoivancic.from.hr/set-the-authorization-bearer-header-in-guzzle-http-client/
-
-// todo : generate client code WITH oauth support (should have header : bearer in the code)
 
 $httpClient=new GuzzleHttp\Client(['headers' => ['Authorization' => 'Bearer '.$bearertoken]]);
 
 $apiInstance = new Swagger\Client\Api\SystemCheckApi($httpClient);
-
  
 $id = "id_example"; // string | input message
 
-//$apiInstance->getApiClient()->addDefaultHeader("Authorization", 'Bearer '.$bearertoken);
-
-try {
+try 
+{
     $result = $apiInstance->echoGet($id);
     echo "--- success : ";
-	print_r($result);
-	
-} catch (Exception $e) {
+	print_r($result);	
+} 
+catch (Exception $e) 
+{
     echo 'Exception when calling SystemCheckApi->echoGet: ', $e->getMessage(), PHP_EOL;
 }
 

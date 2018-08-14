@@ -13,9 +13,47 @@
 		</style>
 	</head>
 	<body>
-
+	    <?php include("includes/authenticate.php");?>
 		<?php include("includes/design-top.php");?>
 		<?php include("includes/navigation.php");?>
+
+		<?php
+		// show error reporting
+ini_set('display_errors', 1);
+error_reporting(~0);
+
+
+require_once(__DIR__ . '/vendor/autoloader.php');
+
+// doesn't work ...
+require_once(__DIR__ . '/autoload.php');
+
+
+
+include "Swagger/Client/Configuration.php";
+include "Swagger/Client/HeaderSelector.php";
+include "Swagger/Client/ObjectSerializer.php";
+include "Swagger/Client/ApiException.php";
+include "Swagger/Client/Api/GreenCardCarApi.php";
+include "Swagger/Client/Api/OrganizationApi.php";
+include "Swagger/Client/Model/ModelInterface.php";
+include "Swagger/Client/Model/Organization.php";
+
+$httpClient=new GuzzleHttp\Client(['headers' => ['Authorization' => 'Bearer '.$bearertoken]]);
+
+$apiInstance = new Swagger\Client\Api\GreenCardCarApi($httpClient);
+ 
+
+try 
+{
+    $insurances = $apiInstance->carGreenCardRequestsGetInsuranceOrganizations();
+} 
+catch (Exception $e) 
+{
+    echo 'Exception when calling GreenCardCarApi->carGreenCardRequestsGetInsuranceOrganizations: ', $e->getMessage(), PHP_EOL;
+}
+
+		?>
 
 		<div class="container" id="main-content">
 			<h2>Request a green card - Demo.</h2>
@@ -164,8 +202,43 @@ CALL API
 			<div class="row">
 				<div class="col-md-8">
 
+				<script>
+				function loadagents(insuranceVAT){
+					console.log(insuranceVAT);
+
+					// as CORS is not enable, this should not work :
+
+					$.ajax({
+						url: 'https://devslot.assurbox.net/api/v1/Organizations/Insurances/'+insuranceVAT+'/Agencies',
+						
+						beforeSend: function(xhr) {
+							xhr.setRequestHeader("Authorization", "Bearer <?php echo $bearertoken ?>")
+						},
+						success: function(data){
+							console.log(data)
+						},
+						error: function(jqXHR, textStatus, errorThrown)   {
+							console.log(textStatus);
+						}
+					});
+
+				}
+				</script>
 
 					<form method="post"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" <?php echo $haserror? "class='has-error'":"" ?>>  
+							<h3>Insurer information <small>(from the AssurBox Api)</small></h3>
+							<div class="form-group">
+							<select name="insurance" class="form-control" onchange="loadagents(this.value)">
+								<?php
+									foreach($insurances as $key => $value):
+
+										$insurance = json_decode($value); // decode json to be able to access the properties
+										echo '<option value="'.$insurance->VAT.'">'.$insurance->Name.'</option>'; 
+
+									endforeach;
+								?>
+								</select>
+							</div>
 
 							<h3>Customer information <small>(should come from your system)</small></h3>
 							<div class="form-group">
@@ -173,8 +246,8 @@ CALL API
 									<input type="text" class="form-control" name="customerLastName" value="<?php echo $customerLastName;?>">
 									</label>
 									<span class="error">* <?php echo $customerLastNameErr;?></span>
-								</div>
-								<div class="form-group">
+							</div>
+							<div class="form-group">
 									<label class="control-label">First Name
 										<input type="text" class="form-control" name="customerFirstName" value="<?php echo $customerFirstName;?>">
 										</label>
