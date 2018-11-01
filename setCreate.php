@@ -8,6 +8,7 @@ if (isset($_SESSION['ASSURBOX_BEARERTOKEN'])) {
     $CustomerPersonLastName = isset($_POST['Customer_Person_LastName'])?$_POST['Customer_Person_LastName']:null;
     $CustomerPersonFirstName = isset($_POST['Customer_Person_FirstName'])?$_POST['Customer_Person_FirstName']:null;
     $CustomerPersonBirthdate = isset($_POST['Customer_Person_BirthDate'])?$_POST['Customer_Person_BirthDate']:null;
+    $CustomerPersonNationalIdentityNumber = isset($_POST['Customer_Person_NationalIdentityNumber'])?$_POST['Customer_Person_NationalIdentityNumber']:null;
     $CustomerPersonEmail = isset($_POST['Customer_Person_Email'])?$_POST['Customer_Person_Email']:null;
     $CustomerPersonPhone = isset($_POST['Customer_Person_Phone'])?$_POST['Customer_Person_Phone']:null;
     $CustomerPersonAdressCity = isset($_POST['Customer_Person_Address_City'])?$_POST['Customer_Person_Address_City']:null;
