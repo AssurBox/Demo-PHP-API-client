@@ -97,6 +97,14 @@ if ($msg !== '') {
                 <span class="field-validation-valid text-danger" data-valmsg-for="Customer.Person.BirthDate" data-valmsg-replace="true"></span>
             </div>
         </div>
+        </div>
+		        <div class="form-group">
+            <label class="control-label col-md-2" for="Customer_Person_NationalIdentityNumber">NationalIdentityNumber</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" data-val="true" data-val-date="The field NationalIdentityNumber must be a date." id="Customer_Person_NationalIdentityNumber" name="Customer.Person.NationalIdentityNumber" type="text" value="985-42135482-36" />
+                <span class="field-validation-valid text-danger" data-valmsg-for="Customer.Person.BirthDate" data-valmsg-replace="true"></span>
+            </div>
+        </div>
         <div class="form-group">
             <label class="control-label col-md-2" for="Customer_Person_Email">Email</label>
             <div class="col-md-10">
