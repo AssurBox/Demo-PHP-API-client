@@ -207,6 +207,7 @@ CALL API
 					console.log(insuranceVAT);
 
 					// as CORS is not enable, this should not work :
+					// we need to use a "php proxy"
 
 					$.ajax({
 						url: 'https://devslot.assurbox.net/api/v1/Organizations/Insurances/'+insuranceVAT+'/Agencies',
