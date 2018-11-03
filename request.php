@@ -21,9 +21,9 @@ if (isset($_SESSION['ASSURBOX_BEARERTOKEN'])) {
 
     curl_close($ch);
 
-    $listRequest=json_decode($result,true);
+    $listRequest=json_decode($result,true)[Data];
 
-    $_SESSION['listRequest'] = $listRequest;
+    $_SESSION['listRequest'] = $listRequest[Data];
 
     header('Content-Type: text/html; charset=utf-8');
 }
