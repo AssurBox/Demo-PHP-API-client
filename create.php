@@ -16,7 +16,7 @@ if (isset($_SESSION['ASSURBOX_BEARERTOKEN'])) {
 else {
     header("Location: /");
     exit();
-}
+// }
 ?>
 <!DOCTYPE html>
 <html>
@@ -96,7 +96,6 @@ if ($msg !== '') {
                 <input class="form-control text-box single-line" data-val="true" data-val-date="The field BirthDate must be a date." id="Customer_Person_BirthDate" name="Customer.Person.BirthDate" type="datetime" value="8/16/1997 8:12:14 PM" />
                 <span class="field-validation-valid text-danger" data-valmsg-for="Customer.Person.BirthDate" data-valmsg-replace="true"></span>
             </div>
-        </div>
         </div>
 		        <div class="form-group">
             <label class="control-label col-md-2" for="Customer_Person_NationalIdentityNumber">NationalIdentityNumber</label>
