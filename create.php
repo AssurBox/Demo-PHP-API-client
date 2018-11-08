@@ -16,7 +16,7 @@ if (isset($_SESSION['ASSURBOX_BEARERTOKEN'])) {
 else {
     header("Location: /");
     exit();
-// }
+}
 ?>
 <!DOCTYPE html>
 <html>
