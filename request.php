@@ -11,7 +11,7 @@ ini_set('display_errors', 1);
 if (isset($_SESSION['ASSURBOX_BEARERTOKEN'])) {
     $bearer = $_SESSION['ASSURBOX_BEARERTOKEN'];
 
-	if(isset($_REQUEST['page'])
+	if(isset($_REQUEST['page']))
 	{
 		$page_number = $_REQUEST['page'];
 	}
