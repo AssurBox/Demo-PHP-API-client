@@ -5,6 +5,9 @@ $bearer = '';
 $page_size = 50;
 $page_number = 0;
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 if (isset($_SESSION['ASSURBOX_BEARERTOKEN'])) {
     $bearer = $_SESSION['ASSURBOX_BEARERTOKEN'];
 
