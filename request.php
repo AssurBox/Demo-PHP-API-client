@@ -186,7 +186,7 @@ if (isset($listRequest)) {
 			for ($i = 0; $i < $pages; $i++)
 			{
 				//@(i == Model.PageNumber ? "class=active" : "")>
-			   echo  '<li> <a href="?request?page='.$i.'">'.$i.'</a></li>'
+			   echo  '<li> <a href="?request?page='.$i.'">'.$i.'</a></li>';
 			}
 
         ?>
