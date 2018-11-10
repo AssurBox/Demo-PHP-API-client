@@ -8,6 +8,10 @@ $page_number = 0;
 if (isset($_SESSION['ASSURBOX_BEARERTOKEN'])) {
     $bearer = $_SESSION['ASSURBOX_BEARERTOKEN'];
 
+	if(isset($_REQUEST['page'])
+	{
+		$page_number = $_REQUEST['page'];
+	}
     $ch = curl_init('https://devslot.assurbox.net/api/v1.0/GreenCard/Car/Requests/' . $page_number . '/' . $page_size);
 
     header('Content-Type: application/json');
@@ -21,9 +25,14 @@ if (isset($_SESSION['ASSURBOX_BEARERTOKEN'])) {
 
     curl_close($ch);
 
-    $listRequest=json_decode($result,true)[Data];
+	$requestresult=json_decode($result,true);
+    $listRequest=$requestresult[Data];
+	
+	$totalitems = $requestresult[Total];
+	$currentpagenumber = $requestresult[PageNumber];
+	$pagesize = $requestresult[PageSize];
 
-    $_SESSION['listRequest'] = $listRequest[Data];
+  //  $_SESSION['listRequest'] = $listRequest[Data];
 
     header('Content-Type: text/html; charset=utf-8');
 }
@@ -156,6 +165,36 @@ if (isset($listRequest)) {
 </table>
 
         <hr />
+		
+		
+		
+		<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <li>
+            <a href="?request?page=<?php echo($currentpagenumber-1) ?>" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        
+		<?php
+            $pages = $totalitems /$pagesize;
+        
+
+			for (int i = 0; i < pages; i++)
+			{
+				//@(i == Model.PageNumber ? "class=active" : "")>
+			   echo  '<li> <a href="?request?page='.i.'">'.i.'</a></li>'
+			}
+
+        ?>
+        <li>
+            <a href="?request?page=<?php echo($currentpagenumber+1) ?>"  aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+		<hr />
         <footer>
             <p>&copy; 2018 - AssurBox Demo</p>
         </footer>
