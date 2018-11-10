@@ -174,7 +174,7 @@ if (isset($listRequest)) {
 		<nav aria-label="Page navigation">
     <ul class="pagination">
         <li>
-            <a href="/request?page=<?php echo($currentpagenumber-1) ?>" aria-label="Previous">
+            <a href="/request.php?page=<?php echo($currentpagenumber-1) ?>" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
@@ -186,12 +186,12 @@ if (isset($listRequest)) {
 			for ($i = 0; $i < $pages; $i++)
 			{
 				//@(i == Model.PageNumber ? "class=active" : "")>
-			   echo  '<li> <a href="/request?page='.$i.'">'.$i.'</a></li>';
+			   echo  '<li> <a href="/request.php?page='.$i.'">'.$i.'</a></li>';
 			}
 
         ?>
         <li>
-            <a href="/request?page=<?php echo($currentpagenumber+1) ?>"  aria-label="Next">
+            <a href="/request.php?page=<?php echo($currentpagenumber+1) ?>"  aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>
