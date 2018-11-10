@@ -29,11 +29,11 @@ if (isset($_SESSION['ASSURBOX_BEARERTOKEN'])) {
     curl_close($ch);
 
 	$requestresult=json_decode($result,true);
-    $listRequest=$requestresult[Data];
+    $listRequest=$requestresult['Data'];
 	
-	$totalitems = $requestresult[Total];
-	$currentpagenumber = $requestresult[PageNumber];
-	$pagesize = $requestresult[PageSize];
+	$totalitems = $requestresult['Total'];
+	$currentpagenumber = $requestresult['PageNumber'];
+	$pagesize = $requestresult['PageSize'];
 
   //  $_SESSION['listRequest'] = $listRequest[Data];
 
@@ -174,7 +174,7 @@ if (isset($listRequest)) {
 		<nav aria-label="Page navigation">
     <ul class="pagination">
         <li>
-            <a href="?request?page=<?php echo($currentpagenumber-1) ?>" aria-label="Previous">
+            <a href="/request?page=<?php echo($currentpagenumber-1) ?>" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
@@ -186,12 +186,12 @@ if (isset($listRequest)) {
 			for ($i = 0; $i < $pages; $i++)
 			{
 				//@(i == Model.PageNumber ? "class=active" : "")>
-			   echo  '<li> <a href="?request?page='.$i.'">'.$i.'</a></li>';
+			   echo  '<li> <a href="/request?page='.$i.'">'.$i.'</a></li>';
 			}
 
         ?>
         <li>
-            <a href="?request?page=<?php echo($currentpagenumber+1) ?>"  aria-label="Next">
+            <a href="/request?page=<?php echo($currentpagenumber+1) ?>"  aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>
