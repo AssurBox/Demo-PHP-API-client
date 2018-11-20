@@ -15,7 +15,7 @@ if (isset($_SESSION['ASSURBOX_BEARERTOKEN'])) {
 	{
 		$page_number = $_REQUEST['page'];
 	}
-    $ch = curl_init('https://devslot.assurbox.net/api/v1.0/GreenCard/Car/Requests/' . $page_number . '/' . $page_size);
+    $ch = curl_init('https://sandbox.assurbox.net/api/v1.0/GreenCard/Car/Requests/' . $page_number . '/' . $page_size);
 
     header('Content-Type: application/json');
     $authorization = "Authorization: Bearer ". $bearer;

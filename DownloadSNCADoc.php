@@ -8,7 +8,7 @@ if (isset($_SESSION['ASSURBOX_BEARERTOKEN'])) {
 
     $id = isset($_GET['correlationId'])?$_GET['correlationId']:null;
     if(isset($id) || $id!==""){
-        $url = 'https://devslot.assurbox.net/api/v1.0/GreenCard/Car/Requests/' . $id . '/DocumentsSNCA';
+        $url = 'https://sandbox.assurbox.net/api/v1.0/GreenCard/Car/Requests/' . $id . '/DocumentsSNCA';
 
         $ch = curl_init($url);
 

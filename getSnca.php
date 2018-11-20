@@ -3,7 +3,7 @@ session_start();
 //session_unset ();
     $bearer = $_SESSION['ASSURBOX_BEARERTOKEN'];
 
-    $url = 'https://devslot.assurbox.net/api/v1.0/GreenCard/Car/Requests/954e61c2-60d0-4679-8b7b-447ec56d733f/DocumentsSNCA';
+    $url = 'https://sandbox.assurbox.net/api/v1.0/GreenCard/Car/Requests/954e61c2-60d0-4679-8b7b-447ec56d733f/DocumentsSNCA';
     $ch = curl_init($url);
 
     header('Content-Type: application/json');

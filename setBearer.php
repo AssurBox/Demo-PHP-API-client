@@ -9,7 +9,7 @@ function setBearer() {
 	);
   
 	$postdata = http_build_query($data); 
-	$ch = curl_init( 'https://devslot.assurbox.net/oauth/token' );
+	$ch = curl_init( 'https://sandbox.assurbox.net/oauth/token' );
 	curl_setopt( $ch, CURLOPT_POST, 1);
 	curl_setopt( $ch, CURLOPT_POSTFIELDS, $postdata);
 	curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 0);

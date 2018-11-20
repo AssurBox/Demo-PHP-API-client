@@ -6,7 +6,7 @@ if (isset($_SESSION['ASSURBOX_BEARERTOKEN'])) {
     $id = isset($_GET['correlationId'])?$_GET['correlationId']:null;
     if(isset($id) || $id!==""){
         $bearer = $_SESSION['ASSURBOX_BEARERTOKEN'];
-        $ch = curl_init('https://devslot.assurbox.net/api/v1.0/GreenCard/Car/Requests/'. $id);
+        $ch = curl_init('https://sandbox.assurbox.net/api/v1.0/GreenCard/Car/Requests/'. $id);
     
         header('Content-Type: application/json');
         $authorization = "Authorization: Bearer ". $bearer;

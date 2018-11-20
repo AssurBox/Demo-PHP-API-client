@@ -42,7 +42,7 @@ if (isset($_SESSION['ASSURBOX_BEARERTOKEN'])) {
         $postfield = "{\n  \"RequestDateUTC\": \"" . $date . "\",\n  \"CorrelationId\": \"" . $id . "\",\n  \"LicencePlate\": \"" . $licensePlate . "\",\n  \"VIN\": \"" . $vin . "\",\n  \"Communication\": \"" . $communication . "\"\n}";
 
         curl_setopt_array($ch, array(
-          CURLOPT_URL => "https://devslot.assurbox.net/api/v1.0/GreenCard/Car/Requests",
+          CURLOPT_URL => "https://sandbox.assurbox.net/api/v1.0/GreenCard/Car/Requests",
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => "",
           CURLOPT_MAXREDIRS => 10,

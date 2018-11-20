@@ -8,7 +8,7 @@ function getListRequest() {
     if (isset($_SESSION['ASSURBOX_BEARERTOKEN'])) {
         $bearer = $_SESSION['ASSURBOX_BEARERTOKEN'];
 
-        $ch = curl_init('https://devslot.assurbox.net/api/v1.0/GreenCard/Car/Requests');
+        $ch = curl_init('https://sandbox.assurbox.net/api/v1.0/GreenCard/Car/Requests');
 
         header('Content-Type: application/json');
         $authorization = "Authorization: Bearer ". $bearer;
