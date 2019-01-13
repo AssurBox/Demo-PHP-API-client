@@ -10,4 +10,4 @@ The Swagger Api documentation can be found here : http://assurbox.net/api-docume
 live demo :
 https://assurboxphpclient.azurewebsites.net/
 
-(!) Remark : works wit api version 1.0.5, need to be adapted for next version
+# (!) Remark : works with api version 1.0.5, needs to be adapted for next versions
